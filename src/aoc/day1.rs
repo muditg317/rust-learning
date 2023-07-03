@@ -1,6 +1,6 @@
 use super::utils;
 
-type ElvesData = Vec<Vec<u32>>;
+type ElvesData = Vec<Vec<usize>>;
 
 /**
  * find the heaviest elf amount
@@ -17,7 +17,7 @@ fn task1(elves: &ElvesData) -> String {
       heaviest_load = sum;
     }
   }
-  return format!("{heaviest_load}");
+  format!("{heaviest_load}")
 }
 
 /**
@@ -47,11 +47,11 @@ fn task2(elves: &ElvesData) -> String {
   return format!("{}", top3[0] + top3[1] + top3[2]);
 }
 
-pub fn run(which_tasks: &Option<Vec<usize>>) -> Result<String, Box<dyn std::error::Error + 'static>> {
+pub(super) fn run(which_tasks: &Option<Vec<usize>>) -> Result<String, Box<dyn std::error::Error + 'static>> {
   return utils::run_tasks("inputs/day1.txt", |file_contents| {
     let mut elves: ElvesData = Default::default();
     for elf_str in file_contents.split("\n\n") {
-        let mut elf_data: Vec<u32> = Vec::new();
+        let mut elf_data = Vec::new();
         for item in elf_str.split("\n") {
           elf_data.push(item.parse()?);
         }
